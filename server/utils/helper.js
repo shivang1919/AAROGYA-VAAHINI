@@ -4,8 +4,6 @@ const cron = require('node-cron');
  * we will just check is there any email which is to be sent 
  * by now and is PENDING
  */
-
-
 const fetchdriverlocation = async () => {
     cron.schedule('*/2 * * * *', async () => {
 
