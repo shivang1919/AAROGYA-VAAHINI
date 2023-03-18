@@ -66,8 +66,9 @@ const loginDriver = asyncHandler(async(req,res)=>{
             _id:driverFound.id,
             name:driverFound.name,
             email: driverFound.email,
-            mobile: driverFound.password,
-            cpassword:driverFound.cpassword,
+            mobile: driverFound.mobile,
+            password: driverFound.password,
+            // cpassword:driverFound.cpassword,
             token : generateToken(driverFound.id)
         })
 

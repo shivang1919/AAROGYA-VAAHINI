@@ -65,8 +65,9 @@ const loginUser = asyncHandler(async(req,res)=>{
             _id:userFound.id,
             name:userFound.name,
             email: userFound.email,
-            mobile: userFound.password,
-            cpassword:userFound.cpassword,
+            mobile:userFound.mobile,
+            password: userFound.password,
+            // cpassword:userFound.cpassword,
             token : generateToken(userFound.id)
         })
 
