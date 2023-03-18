@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.img{
-  background-image: url(../public/ambulacia.jpg);
+.img {
+  background-image: url(../public/ambu.jpg);
+  background-repeat: no-repeat;
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

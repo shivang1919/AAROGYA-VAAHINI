@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useState} from 'react';
+import {NavLink} from 'react-router-dom'
 
 export default function Userlogin() {
     return (
@@ -44,9 +45,11 @@ export default function Userlogin() {
                     {" "}
                     Don't have an account?{" "}
                     <div className="mt-6">
+                        <NavLink to="users/register">
                         <button className=" px-40 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
                             Sign Up
                         </button>
+                        </NavLink>
                     </div>
                 </p>
             </div>

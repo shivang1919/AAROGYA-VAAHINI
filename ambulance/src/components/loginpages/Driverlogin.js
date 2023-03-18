@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {NavLink} from 'react-router-dom'
 export default function Driverlogin() {
     return (
         <div className="relative bg-[#1C2530] flex flex-col justify-center min-h-screen overflow-hidden">
@@ -44,9 +44,11 @@ export default function Driverlogin() {
                     {" "}
                     Don't have an account?{" "}
                     <div className="mt-6">
+                        <NavLink to="drivers/register">
                         <button className=" px-40 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:bg-purple-600">
                             Sign Up
                         </button>
+                        </NavLink>
                     </div>
                 </p>
             </div>
