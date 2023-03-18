@@ -12,9 +12,9 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Frontpage />} />
-          <Route path='/drivers/register' element={<Driversignup/>} />
+          <Route path='/drivers/login/drivers/register' element={<Driversignup/>} />
           <Route path='/drivers/login' element={<Driverlogin/>} />
-          <Route path='/users/register' element={<Usersignup/>} />
+          <Route path='/users/login/users/register' element={<Usersignup/>} />
           <Route path='/users/login' element={<Userlogin/>} />
           
         </Routes>
