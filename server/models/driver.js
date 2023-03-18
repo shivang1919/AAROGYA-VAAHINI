@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const UserSchema = new mongoose.Schema(
+const User = require("./user");
+const DriverSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -32,25 +33,31 @@ const UserSchema = new mongoose.Schema(
             required: true,
             min: 8,
         },
-        latitude: {
-            type: Number,
-            // required: true
+        latitude:{
+            type:Number,
+            // required:true
         },
-        longitude: {
-            type: Number,
-            // required: true
+        longitude:{
+            type:Number,
+            // requried:true
         },
-        driverassigned: {
-
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Driver",
-            default: null
-
+        isloggedin:{
+            type:Boolean,
+            default:false
+        },
+        isoccupied:{
+            type:Boolean,
+            default:false
+        },
+        targetuser:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User",
+            default:null
         }
-
+        
     },
     { timestamps: true }
 );
 
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+const Driver = mongoose.model("Driver", DriverSchema);
+module.exports = Driver;
