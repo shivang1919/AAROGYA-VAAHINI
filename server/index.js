@@ -11,7 +11,7 @@ const cors = require('cors');
 
 dotenv.config();
 app.use(cors({
-    "origin": ["http://localhost:3000"],
+    "origin": ["http://localhost:3000", 'https://aarogya-vaahini.vercel.app'],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
 }))
