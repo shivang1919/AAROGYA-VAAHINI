@@ -13,21 +13,22 @@ const Driversignup = () => {
 
     });
     const adddata = (e) => {
-        const {name, value} = e.target;
-        sdata(()=>{
-            return{
+        const { name, value } = e.target;
+        sdata(() => {
+            return {
                 ...ddata,
                 [name]: value
             }
         })
     }
-    const senddata = async (e)=> {
+    const senddata = async (e) => {
         e.preventDefault();
         const { name, email, mobile, password, cpassword } = ddata
-        const res = await fetch("/api/drivers/register",{
+        console.log(ddata)
+        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/drivers/register", {
             method: "POST",
             headers: {
-                "content-Type":"application/json"
+                "content-Type": "application/json"
             },
             body: JSON.stringify({
                 name, email, mobile, password, cpassword
@@ -46,7 +47,9 @@ const Driversignup = () => {
             })
             sdata({ ...ddata, name: "", email: "", mobile: "", password: "", cpassword: "" });
         }
+
     }
+
     return (
         <div className="font-sans relative flex flex-col justify-center min-h-screen overflow-hidden h-full w-full bg-gray-400  backdrop-filter backdrop-blur-sm bg-opacity-5">
             <div className="w-full bg-[#1C2530] p-6 m-auto rounded-md border-2 border-gray-100 shadow-[0px_0px_40px_rgba(0,0,0,0.8)] shadow-zinc-400 lg:max-w-xl">
@@ -122,7 +125,7 @@ const Driversignup = () => {
                     </div>
                 </form>
 
-                
+
             </div>
             <ToastContainer />
         </div>
