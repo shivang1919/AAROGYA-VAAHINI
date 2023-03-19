@@ -48,6 +48,7 @@ const registerDriver = asyncHandler(async(req,res)=>{
     }
 
 })
+
 // verifying a user (LOGIN)
 const loginDriver = asyncHandler(async(req,res)=>{
     const {email,password} = req.body;
