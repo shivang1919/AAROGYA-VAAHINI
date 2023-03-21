@@ -26,6 +26,8 @@ const registerDriver = asyncHandler(async(req,res)=>{
         name,email,mobile,
         password:bcrypt.hashSync(password, salt),
         cpassword:bcrypt.hashSync(password, salt),
+        isloggedin:false,
+        isoccupied:false,
 
     }) 
     // save user
@@ -39,6 +41,7 @@ const registerDriver = asyncHandler(async(req,res)=>{
             mobile: driver.mobile,
             password:driver.password,
             cpassword:driver.cpassword,
+           
             token : generateToken(driver.id)
         })
     }
@@ -63,14 +66,12 @@ const loginDriver = asyncHandler(async(req,res)=>{
 
     // checking password
     if(bcrypt.compareSync(password,driverFound.password)){
+       const driverUpdated= await Driver.findByIdAndUpdate({_id:driverFound._id},{
+            isloggedin:true
+        })
+        console.log(driverUpdated)
         res.status(201).json({
-            _id:driverFound.id,
-            name:driverFound.name,
-            email: driverFound.email,
-            mobile: driverFound.mobile,
-            password: driverFound.password,
-            cpassword:driverFound.cpassword,
-            token : generateToken(driverFound.id)
+            driverUpdated,token:generateToken(driverUpdated._id)
         })
 
     }
@@ -80,4 +81,13 @@ const loginDriver = asyncHandler(async(req,res)=>{
 
 })
 
-module.exports = {registerDriver,loginDriver}
+ const getAllAvailableDriver=asyncHandler(async(req,res)=>{
+        try {
+                const availableDriver=await Driver.find({isloggedin:true,isoccupied:false})
+                res.status(201).json({availableDriver})
+        } catch (error) {
+            res.status(500).json({message:"Error in fetching the drivers"})
+        }
+ })
+
+module.exports = {registerDriver,loginDriver,getAllAvailableDriver}
