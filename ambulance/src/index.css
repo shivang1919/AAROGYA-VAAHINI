@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 .img {
-  background-image: url(../public/ambu.jpg);
+  /* background-image: url(../public/ambu.jpg); */
+  background-image: url(../public/newambu.jpg);
   background-repeat: no-repeat;
   height: 100%;
 
@@ -11,4 +12,9 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+}
+
+.pFont{
+  font-family: 'Poppins', sans-serif;
 }
