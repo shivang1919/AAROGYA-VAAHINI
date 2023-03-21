@@ -1,6 +1,56 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom'
+import React,{useState} from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Driverlogin() {
+    const navigate=useNavigate();
+    const [logdata, setdata] = useState({
+        email:"",
+        password:""
+    })
+    // const {account,setAccount} = useContext(LoginContext);
+    const adddata = (e)=>{
+        const{name,value} = e.target;
+        setdata(() => {
+            return {
+                ...logdata,
+                [name]:value
+            }
+
+        })
+    }
+    const senddata = async(e) => {
+        e.preventDefault();
+        const{email,password} = logdata;
+        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/drivers/login",{
+            method: "POST",
+            headers:{
+                "content-Type": "application/json"                
+            },
+            body: JSON.stringify({
+                email,password
+            })
+        })
+        const data = await res.json();
+        console.log(data);
+        if (res.status === 400 || !data) {
+            console.log("invalid details");
+            toast.warn("invalid details", {
+                position: 'top-center'
+            })
+        } else {
+            console.log("data valid")
+            // setAccount(data)
+            toast.success("login done successfully", {
+                position: "top-center"
+            })
+            setdata({ ...logdata, email: "", password: "" });
+            navigate("/")
+
+        }
+
+
+    }
     return (
         <div className="font-sans relative flex flex-col justify-center min-h-screen overflow-hidden h-full w-full bg-gray-400  backdrop-filter backdrop-blur-sm bg-opacity-5">
             <div className="w-full bg-[#1C2530] p-6 m-auto rounded-md border-2 border-gray-100 shadow-[0px_0px_40px_rgba(0,0,0,0.8)] shadow-zinc-400 lg:max-w-xl">
@@ -10,48 +60,49 @@ export default function Driverlogin() {
                 <form className="mt-6">
                     <div className="mb-2">
                         <label
-                            for="email"
+                            htmlFor="email"
                             className="block tracking-wider -mb-1 mt-4 text-lg font-semibold text-[#F7B661]"
                         >
                             Email
                         </label>
                         <input
-                            type="email"
+                            type="email" onChange={adddata} value={logdata.email} name="email"
                             className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your Email '
                         />
                     </div>
                     <div className="mb-2">
                         <label
-                            for="password"
+                            htmlFor="password"
                             className="block tracking-wider -mb-1 mt-4 text-lg font-semibold text-[#F7B661]"
                         >
                             Password
                         </label>
                         <input
-                            type="password"
+                            type="password" onChange={adddata} value={logdata.password} name="password"
                             className="block w-full px-4 py-2 mt-2 text-p bg-white border rounded-md focus:border-blue-700 focus:ring-offset-fuchsia- focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your Password '
                         />
                     </div>
                     
                     <div className="mt-6">
-                        <button className=" text-lg px-40 py-2 mx-20 tracking-wide text-white transition-colors duration-200 transform  bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none ">
+                        <button className=" text-lg px-40 py-2 mx-20 tracking-wide text-white transition-colors duration-200 transform  bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none "onClick={senddata}>
                             Login
                         </button>
                     </div>
                 </form>
 
-                <p className="mt-6 text-sm tracking-wider text-center text-zinc-100 mx-20">
+                <div className="mt-6 text-sm tracking-wider text-center text-zinc-100 mx-20">
                     {" "}
                     Don't have an account?{" "}
                     <div className="mt-6">
                         <NavLink to="/drivers/login/drivers/register">
-                        <button className=" text-lg px-36 py-2 tracking-wider text-white transition-colors duration-100 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none ">
+                        <button className=" text-lg px-36 py-2 tracking-wider text-white transition-colors duration-100 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none " >
                             Sign Up
                         </button>
                         </NavLink>
                     </div>
-                </p>
+                </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }

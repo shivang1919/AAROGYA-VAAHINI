@@ -1,6 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
+// import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Driversignup = () => {
+    const [ddata, sdata] = useState({
+        name: "",
+        email: "",
+        mobile: "",
+        password: "",
+        cpassword: ""
+
+    });
+    const adddata = (e) => {
+        const { name, value } = e.target;
+        sdata(() => {
+            return {
+                ...ddata,
+                [name]: value
+            }
+        })
+    }
+    const senddata = async (e) => {
+        e.preventDefault();
+        const { name, email, mobile, password, cpassword } = ddata
+        console.log(ddata)
+        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/drivers/register", {
+            method: "POST",
+            headers: {
+                "content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name, email, mobile, password, cpassword
+            })
+        })
+        const data = await res.json();
+        console.log(data);
+        if (res.status === 400 || !data) {
+            toast.warn("inavalid details", {
+                position: "top-center"
+            })
+        } else {
+            // alert("data successfully added");
+            toast.success("data successfully added", {
+                postition: "top-center"
+            })
+            sdata({ ...ddata, name: "", email: "", mobile: "", password: "", cpassword: "" });
+        }
+
+    }
+
     return (
         <div className="font-sans relative flex flex-col justify-center min-h-screen overflow-hidden h-full w-full bg-gray-400  backdrop-filter backdrop-blur-sm bg-opacity-5">
             <div className="w-full bg-[#1C2530] p-6 m-auto rounded-md border-2 border-gray-100 shadow-[0px_0px_40px_rgba(0,0,0,0.8)] shadow-zinc-400 lg:max-w-xl">
@@ -16,7 +65,7 @@ const Driversignup = () => {
                             Name
                         </label>
                         <input
-                            type="name"
+                            type="name" onChange={adddata} value={ddata.name} name="name"
                             className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your name '
                         />
                     </div>
@@ -28,7 +77,7 @@ const Driversignup = () => {
                             Mobile Number
                         </label>
                         <input
-                            type="text"
+                            type="text" onChange={adddata} value={ddata.mobile} name="mobile"
                             className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your mobile number '
                         />
                     </div>
@@ -40,7 +89,7 @@ const Driversignup = () => {
                             Email
                         </label>
                         <input
-                            type="email"
+                            type="email" onChange={adddata} value={ddata.email} name="email"
                             className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your email '
                         />
                     </div>
@@ -52,32 +101,33 @@ const Driversignup = () => {
                             Password
                         </label>
                         <input
-                            type="password"
+                            type="password" onChange={adddata} value={ddata.password} name="password"
                             className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your password'
                         />
                     </div>
                     <div className="mb-2">
                         <label
-                            for="password"
+                            for="cpassword"
                             className="block tracking-wider -mb-1 mt-4 text-lg font-semibold text-[#F7B661]"
                         >
                             Confirm Password
                         </label>
                         <input
-                            type="password"
+                            type="password" onChange={adddata} value={ddata.cpassword} name="cpassword"
                             className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your confirmed password'
                         />
                     </div>
 
                     <div className="mt-6">
-                        <button className="  text-lg px-36 py-2 mx-20 tracking-wide text-white transition-colors duration-200 transform  bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none ">
+                        <button className="  text-lg px-36 py-2 mx-20 tracking-wide text-white transition-colors duration-200 transform  bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none " onClick={senddata}>
                             SIGN UP
                         </button>
                     </div>
                 </form>
 
-                
+
             </div>
+            <ToastContainer />
         </div>
 
     )

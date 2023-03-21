@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Frontpage from "./components/frontpage/Frontpage";
 import Driverlogin from "./components/loginpages/Driverlogin";
 import Userlogin from "./components/loginpages/Userlogin"

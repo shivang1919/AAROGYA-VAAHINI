@@ -7,11 +7,19 @@ const dotenv = require("dotenv");
 const { connectDB } = require("./databases/database");
 const userRoutes = require("./routes/userRoutes")
 const driverRoutes = require("./routes/driverRoutes")
+const cors = require('cors');
 
 dotenv.config();
+app.use(cors({
+    "origin": ["http://localhost:3000", 'https://aarogya-vaahini.vercel.app'],
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+}))
+
+
 // routes
-app.use('/api/drivers',driverRoutes);
-app.use('/api/users',userRoutes);
+app.use('/api/drivers', driverRoutes);
+app.use('/api/users', userRoutes);
 
 app.listen(PORT, () => {
     console.log("Backend Server is running !")
