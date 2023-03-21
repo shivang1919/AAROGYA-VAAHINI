@@ -107,7 +107,7 @@ const Driversignup = () => {
                     </div>
                     <div className="mb-2">
                         <label
-                            for="password"
+                            for="cpassword"
                             className="block tracking-wider -mb-1 mt-4 text-lg font-semibold text-[#F7B661]"
                         >
                             Confirm Password
