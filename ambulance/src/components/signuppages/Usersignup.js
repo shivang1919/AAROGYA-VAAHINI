@@ -25,7 +25,7 @@ const Usersignup = () => {
         e.preventDefault();
         const { name, email, mobile, password, cpassword } = udata
         console.log(udata)
-        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/users/register", {
+        const res = await fetch("http://localhost:8000/api/users/register", {
             method: "POST",
             headers: {
                 "content-Type": "application/json"

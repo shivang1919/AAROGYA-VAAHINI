@@ -34,11 +34,13 @@ const UserSchema = new mongoose.Schema(
         },
         latitude: {
             type: Number,
-            // required: true
+            default:0,
+            required: true
         },
         longitude: {
             type: Number,
-            // required: true
+            default:0,
+            required: true
         },
         driverassigned: {
 

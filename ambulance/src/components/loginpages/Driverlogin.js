@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useGeoLocation from '../hooks/useGeoLocation';
 export default function Driverlogin() {
-    const navigate = useNavigate();
+    const geolocation = useGeoLocation()
+    const navigate=useNavigate();
     const [logdata, setdata] = useState({
         email: "",
         password: ""
@@ -19,7 +21,9 @@ export default function Driverlogin() {
 
         })
     }
-    const senddata = async (e) => {
+    const senddata = async(e) => {
+        var latitude = geolocation.coordinates.lat
+        var longitude = geolocation.coordinates.lng
         e.preventDefault();
         const { email, password } = logdata;
         const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/drivers/login", {
@@ -28,11 +32,14 @@ export default function Driverlogin() {
                 "content-Type": "application/json"
             },
             body: JSON.stringify({
-                email, password
+                email,password,
+                latitude:latitude,
+                longitude:longitude
             })
         })
         const data = await res.json();
         console.log(data);
+        localStorage.setItem("driverdata",JSON.stringify(data))
         if (res.status === 400 || !data) {
             console.log("invalid details");
             toast.warn("invalid details", {
