@@ -25,7 +25,7 @@ const Usersignup = () => {
         e.preventDefault();
         const { name, email, mobile, password, cpassword } = udata
         console.log(udata)
-        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/users/register", {
+        const res = await fetch("http://localhost:8000/api/users/register", {
             method: "POST",
             headers: {
                 "content-Type": "application/json"
@@ -112,7 +112,7 @@ const Usersignup = () => {
                             Confirm Password
                         </label>
                         <input
-                            type="password" onChange={adddata} value={udata.password} name="cpassword"
+                            type="password" onChange={adddata} value={udata.cpassword} name="cpassword"
                             className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your confirmed password'
                         />
                     </div>
