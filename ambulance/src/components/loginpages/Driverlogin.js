@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,16 +7,16 @@ export default function Driverlogin() {
     const geolocation = useGeoLocation()
     const navigate=useNavigate();
     const [logdata, setdata] = useState({
-        email:"",
-        password:""
+        email: "",
+        password: ""
     })
     // const {account,setAccount} = useContext(LoginContext);
-    const adddata = (e)=>{
-        const{name,value} = e.target;
+    const adddata = (e) => {
+        const { name, value } = e.target;
         setdata(() => {
             return {
                 ...logdata,
-                [name]:value
+                [name]: value
             }
 
         })
@@ -25,11 +25,11 @@ export default function Driverlogin() {
         var latitude = geolocation.coordinates.lat
         var longitude = geolocation.coordinates.lng
         e.preventDefault();
-        const{email,password} = logdata;
-        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/drivers/login",{
+        const { email, password } = logdata;
+        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/drivers/login", {
             method: "POST",
-            headers:{
-                "content-Type": "application/json"                
+            headers: {
+                "content-Type": "application/json"
             },
             body: JSON.stringify({
                 email,password,
@@ -62,7 +62,7 @@ export default function Driverlogin() {
         <div className="font-sans relative flex flex-col justify-center min-h-screen overflow-hidden h-full w-full bg-gray-400  backdrop-filter backdrop-blur-sm bg-opacity-5">
             <div className="w-full bg-[#1C2530] p-6 m-auto rounded-md border-2 border-gray-100 shadow-[0px_0px_40px_rgba(0,0,0,0.8)] shadow-zinc-400 lg:max-w-xl">
                 <h1 className="text-3xl tracking-wider font-semibold text-center text-white">
-                   WELCOME TO AAROGYA VAAHINI DRIVER LOGIN
+                    WELCOME TO AAROGYA VAAHINI  DRIVER LOGIN
                 </h1>
                 <form className="mt-6">
                     <div className="mb-2">
@@ -89,9 +89,9 @@ export default function Driverlogin() {
                             className="block w-full px-4 py-2 mt-2 text-p bg-white border rounded-md focus:border-blue-700 focus:ring-offset-fuchsia- focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your Password '
                         />
                     </div>
-                    
+
                     <div className="mt-6">
-                        <button className=" text-lg px-40 py-2 mx-20 tracking-wide text-white transition-colors duration-200 transform  bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none "onClick={senddata}>
+                        <button className="text-lg px-40 py-2 mx-20 tracking-wide text-white transition-colors duration-200 transform  bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none" onClick={senddata}>
                             Login
                         </button>
                     </div>
@@ -102,9 +102,10 @@ export default function Driverlogin() {
                     Don't have an account?{" "}
                     <div className="mt-6">
                         <NavLink to="/drivers/login/drivers/register">
-                        <button className=" text-lg px-36 py-2 tracking-wider text-white transition-colors duration-100 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none " >
-                            Sign Up
-                        </button>
+                            {/* <button className=" text-lg px-36 py-2 tracking-wider text-white transition-colors duration-100 transform bg-blue-800 rounded-md hover:bg-white hover:text-black hover:font-semibold focus:outline-none " > */}
+                            <button className="text-lg px-36 py-2 tracking-wider text-white transition-colors duration-100 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none" >
+                                Sign Up
+                            </button>
                         </NavLink>
                     </div>
                 </div>

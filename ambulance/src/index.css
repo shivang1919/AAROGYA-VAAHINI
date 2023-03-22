@@ -4,7 +4,7 @@
 
 .img {
   /* background-image: url(../public/ambu.jpg); */
-  background-image: url(../public/newambu.jpg);
+  background-image: url(../public/newAmb1.jpg);
   background-repeat: no-repeat;
   height: 100%;
 
@@ -12,9 +12,61 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 
 .pFont{
   font-family: 'Poppins', sans-serif;
 }
+
+.frontPos{
+  position: relative;
+}
+.h1Pos{
+  position: absolute;
+  bottom:620px;
+  left:850px;
+}
+/* .imgPos{
+  margin-left: 1000px;
+  height: auto;
+  width: auto;
+  align-content: end;
+  text-align:end;
+  align-items: end;
+} */
+
+/* .sideBox{
+  height: 2px;
+  width: 200px;
+  margin-bottom: 600px;
+} */
+
+.float-parent-element { 
+  width: 50%; 
+} 
+.float-child-element1 { 
+  position: absolute;
+  bottom:500px;
+  right:1150px;
+  float: right; 
+  width: 50%; 
+} 
+.float-child-element2 { 
+  position: absolute;
+  float: left;
+  left: 680px; 
+  bottom:570px;
+  width: 50%; 
+} 
+.red { 
+  /* background-color: red;  */
+  margin-left: 50%; 
+  height: 100px; 
+  width:650px;
+} 
+.yellow {  
+  margin-left: 50%; 
+  height: 100px; 
+  width:600px;
+   /* background-color: yellow;   */
+ }
