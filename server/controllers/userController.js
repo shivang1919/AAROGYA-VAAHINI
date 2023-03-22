@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const generateToken = require('../config/token')
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
+const { findByIdAndUpdate } = require('../models/user')
 // creating a new user (REGISTER)
 const registerUser = asyncHandler(async(req,res)=>{
     const{name,email,mobile,password,cpassword} = req.body
@@ -49,8 +50,8 @@ const registerUser = asyncHandler(async(req,res)=>{
 })
 // verifying a user (LOGIN)
 const loginUser = asyncHandler(async(req,res)=>{
-    const {email,password} = req.body;
-
+    const {email,password,latitude,longitude} = req.body;
+    console.log(req.body)
     // user finding through email
     const userFound = await User.findOne({email});
 
@@ -58,29 +59,24 @@ const loginUser = asyncHandler(async(req,res)=>{
         res.status(400).json({"error":"invalid credentials"})
         return
     }
-
+    if(userFound){
+        
+        if(bcrypt.compareSync(password,userFound.password)){
+            const updatedUser=await User.findByIdAndUpdate({_id:userFound._id},{
+                latitude:latitude,
+                longitude:longitude
+            })
+            res.status(201).json({
+                updatedUser,token : generateToken(userFound.id)
+            })
+    
+        }
+        else{
+            res.status(400).json({"error":"Invalid Credentials"})
+        }
+    }
     // checking password
-    if(bcrypt.compareSync(password,userFound.password)){
-        res.status(201).json({
-            _id:userFound.id,
-            name:userFound.name,
-            email: userFound.email,
-<<<<<<< HEAD
-            mobile:userFound.mobile,
-            password: userFound.password,
-            // cpassword:userFound.cpassword,
-=======
-            mobile: userFound.mobile,
-            password: userFound.password,
-            cpassword:userFound.cpassword,
->>>>>>> 489878e8207d7a08335d43e955d7ef4eea681ec7
-            token : generateToken(userFound.id)
-        })
-
-    }
-    else{
-        res.status(400).json({"error":"Invalid Credentials"})
-    }
+    
 
 })
 

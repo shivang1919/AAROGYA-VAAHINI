@@ -2,9 +2,11 @@ import React,{useState} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import useGeoLocation from '../hooks/useGeoLocation';
 export default function Userlogin() {
+    const geolocation = useGeoLocation()
     const navigate=useNavigate();
+    
     const [logdata, setdata] = useState({
         email:"",
         password:""
@@ -21,7 +23,10 @@ export default function Userlogin() {
         })
     }
     const senddata = async(e) => {
+        var latitude = geolocation.coordinates.lat
+        var longitude = geolocation.coordinates.lng
         e.preventDefault();
+        console.log("I am here")
         const{email,password} = logdata;
         const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/users/login",{
             method: "POST",
@@ -29,11 +34,14 @@ export default function Userlogin() {
                 "content-Type": "application/json"                
             },
             body: JSON.stringify({
-                email,password
+                email,password,
+                latitude:latitude,
+                longitude:longitude,
             })
         })
         const data = await res.json();
         console.log(data);
+        localStorage.setItem("userdata",JSON.stringify( data));
         if (res.status === 400 || !data) {
             console.log("invalid details");
             toast.warn("invalid details", {
@@ -46,8 +54,7 @@ export default function Userlogin() {
                 position: "top-center"
             })
             setdata({ ...logdata, email: "", password: "" });
-            navigate("/")
-
+            navigate("/users/login/users/map")
         }
 
 

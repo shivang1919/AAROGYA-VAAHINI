@@ -67,21 +67,14 @@ const loginDriver = asyncHandler(async(req,res)=>{
     // checking password
     if(bcrypt.compareSync(password,driverFound.password)){
        const driverUpdated= await Driver.findByIdAndUpdate({_id:driverFound._id},{
-            isloggedin:true
+            isloggedin:true,
+            // latitude:latit,
+            // longitude:longit
+
         })
         console.log(driverUpdated)
         res.status(201).json({
-<<<<<<< HEAD
-            _id:driverFound.id,
-            name:driverFound.name,
-            email: driverFound.email,
-            mobile: driverFound.mobile,
-            password: driverFound.password,
-            // cpassword:driverFound.cpassword,
-            token : generateToken(driverFound.id)
-=======
             driverUpdated,token:generateToken(driverUpdated._id)
->>>>>>> 489878e8207d7a08335d43e955d7ef4eea681ec7
         })
 
     }
