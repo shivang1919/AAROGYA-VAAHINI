@@ -3,7 +3,7 @@ import React from 'react'
 const Usermap = () => {
     const showdrivers = async(e) => {
         e.preventDefault();
-        const res = await fetch("http://localhost:8000/api/drivers/getavailabledrivers",{
+        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/drivers/getavailabledrivers",{
             method: "GET",
             headers:{
                 "content-Type": "application/json"                
