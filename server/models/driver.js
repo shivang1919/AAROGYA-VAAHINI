@@ -35,11 +35,14 @@ const DriverSchema = new mongoose.Schema(
         },
         latitude:{
             type:Number,
+            default:0,
             required:true
         },
         longitude:{
             type:Number,
+            default:0,
             requried:true
+
         },
         isloggedin:{
             type:Boolean,
