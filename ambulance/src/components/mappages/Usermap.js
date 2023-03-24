@@ -68,7 +68,15 @@ const Usermap = () => {
                             <Marker position={{
                                 lat: e?.latitude,
                                 lng: e?.longitude
+                            }}
+                            icon={{
 
+                                url: '/ambulance_marker.jpg',
+                        
+                                anchor: new google.maps.Point(17, 46),
+                        
+                                scaledSize: new google.maps.Size(37, 37)
+                        
                             }}
                             // icon={iconMarker}
                             />
