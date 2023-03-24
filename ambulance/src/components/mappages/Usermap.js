@@ -1,13 +1,13 @@
 /*global google*/
 import React, { useState } from 'react'
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-let iconMarker = new window.google.maps.MarkerImage(
-    "https://img.lovepik.com/element/45000/6349.png_300.png",
-    null, /* size is determined at runtime */
-    null, /* origin is 0,0 */
-    null, /* anchor is bottom center of the scaled image */
-    new window.google.maps.Size(32, 32)
-);
+// let iconMarker = new window.google.maps.MarkerImage(
+//     "https://img.lovepik.com/element/45000/6349.png_300.png",
+//     null, /* size is determined at runtime */
+//     null, /* origin is 0,0 */
+//     null, /* anchor is bottom center of the scaled image */
+//     new window.google.maps.Size(32, 32)
+// );
 const mapStyles = {
     width: '80%',
     height: '80%'
@@ -70,7 +70,7 @@ const Usermap = () => {
                                 lng: e?.longitude
 
                             }}
-                            icon={iconMarker}
+                            // icon={iconMarker}
                             />
                         )
                     })
