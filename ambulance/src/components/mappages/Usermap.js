@@ -1,24 +1,21 @@
 /*global google*/
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-// let iconMarker = new window.google.maps.MarkerImage(
-//     "https://img.lovepik.com/element/45000/6349.png_300.png",
-//     null, /* size is determined at runtime */
-//     null, /* origin is 0,0 */
-//     null, /* anchor is bottom center of the scaled image */
-//     new window.google.maps.Size(32, 32)
-// );
+import Markero from "./Markero"
+
 const mapStyles = {
-    width: '80%',
-    height: '80%'
+    width: '100%',
+    height: '100%'
 };
+
 
 
 var userda = JSON.parse(localStorage.getItem("userdata"));
 console.log(userda?.updatedUser?.latitude)
 
-const Usermap = () => {
+const Usermap = (props) => {
     const [driver, setDriver] = useState([])
+
     const showdrivers = async (e) => {
         e.preventDefault();
         const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/drivers/getavailabledrivers", {
@@ -33,17 +30,27 @@ const Usermap = () => {
 
         // localStorage.setItem("availibledriver",JSON.stringify(dridata))
     }
+
     function Mappo() {
-        const [activeMarker, setActiveMarker] = useState(null)
-        const handleActiveMarker = (marker) => {
-            if (marker === activeMarker) {
-                return;
+        const [activeMarker, setActiveMarker] = useState({})
+        const [selectedPlace, setSelectedPlace] = useState({});
+        const [showingInfoWindow, setShowingInfoWindow] = useState(false);
+        const onMarkerClick = (props, marker) => {
+            setActiveMarker(marker);
+            setSelectedPlace(props);
+            setShowingInfoWindow(true);
+        }
+        const onInfoWindowClose = () => {
+            setActiveMarker(null);
+            setShowingInfoWindow(false);
+        }
+        const onMapClicked = () => {
+            if (this.state.showingInfoWindow) {
+                setActiveMarker(null);
+                setShowingInfoWindow(false);
             }
-            setActiveMarker(marker)
-        }
-        const handleOnLoad = (map) => {
-            const bounds = new google.maps
-        }
+        };
+
         return (
             <Map google={window.google}
                 zoom={14}
@@ -55,43 +62,70 @@ const Usermap = () => {
                     }
                 }
             >
-                <Marker position={{
-                    lat: userda?.updatedUser?.latitude,
-                    lng: userda?.updatedUser?.longitude
-                }}
+                <Marker
+                    onClick={onMarkerClick}
+                    position={{
+                        lat: userda?.updatedUser?.latitude,
+                        lng: userda?.updatedUser?.longitude
+                    }}
                     name={userda?.updatedUser?.name}
-                >
-                </Marker>
+                    mobile={userda?.updatedUser?.mobile}
+                />
+
                 {
                     driver?.map((e) => {
                         return (
-                            <Marker position={{
-                                lat: e?.latitude,
-                                lng: e?.longitude
-                            }}
-                            icon={{
+                            // <Markero e={e} />
+                            <Marker
+                                onClick={onMarkerClick}
+                                name={e?.name}
+                                mobile={e?.mobile}
+                                position={{
+                                    lat: e?.latitude,
+                                    lng: e?.longitude
+                                }}
+                                icon={{
 
-                                url: '/ambulance_marker.jpg',
-                        
-                                anchor: new google.maps.Point(17, 46),
-                        
-                                scaledSize: new google.maps.Size(37, 37)
-                        
-                            }}
-                            // icon={iconMarker}
+                                    url: '/ambulance_marker.jpg',
+
+                                    anchor: new google.maps.Point(17, 46),
+
+                                    scaledSize: new google.maps.Size(37, 37)
+
+                                }}
+
                             />
+                            // <InfoWindow
+                            //     marker={activeMarker}
+                            //     onClose={onInfoWindowClose}
+                            //     visible={showingInfoWindow}
+                            // >
+                            //     <div>
+                            //         <h4>{selectedPlace.name}</h4>
+                            //         <h4>{selectedPlace.mobile}</h4>
+                            //     </div>
+                            // </InfoWindow>
+
                         )
                     })
-
-
                 }
+                <InfoWindow
+                    marker={activeMarker}
+                    onClose={onInfoWindowClose}
+                    visible={showingInfoWindow}
+                >
+                    <div>
+                        <h4>{selectedPlace.name}</h4>
+                        <h4>{selectedPlace.mobile}</h4>
+                    </div>
+                </InfoWindow>
 
 
-
-
-            </Map>
+            </Map >
         )
     }
+    
+
 
 
 
@@ -100,13 +134,14 @@ const Usermap = () => {
         <>
 
             <div className='flex-row'>
-                <div>
-                    <button className="bg-blue-500 items-center z-10 position:relative  hover:bg-blue-700 justify-center text-white font-bold py-2 px-4 rounded mt-75px" onClick={showdrivers}>
-                        Button
-                    </button>
-                </div>
-                <div className='position-relative'>
+
+                <div >
                     <Mappo />
+                </div>
+                <div className='flex flex:col items-center justify-center'>
+                    <button className="z-10 items-left text-lg w-48 py-2 tracking-wider text-white transition-colors duration-100 transform bg-red-800 rounded-md hover:bg-white focus:outline-none hover:text-red-800 hover:font-semibold " onClick={showdrivers}>
+                        See availible drivers
+                    </button>
                 </div>
 
             </div>
@@ -115,6 +150,11 @@ const Usermap = () => {
 
 }
 
+
+
 export default GoogleApiWrapper({
     apiKey: process.env.GOOGLE_MAPS_API
 })(Usermap);
+
+
+
