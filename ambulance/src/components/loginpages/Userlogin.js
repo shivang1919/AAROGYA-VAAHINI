@@ -1,47 +1,47 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useGeoLocation from '../hooks/useGeoLocation';
 export default function Userlogin() {
     const geolocation = useGeoLocation()
-    const navigate=useNavigate();
-    
+    const navigate = useNavigate();
+
     const [logdata, setdata] = useState({
-        email:"",
-        password:""
+        email: "",
+        password: ""
     })
     // const {account,setAccount} = useContext(LoginContext);
-    const adddata = (e)=>{
-        const{name,value} = e.target;
+    const adddata = (e) => {
+        const { name, value } = e.target;
         setdata(() => {
             return {
                 ...logdata,
-                [name]:value
+                [name]: value
             }
 
         })
     }
-    const senddata = async(e) => {
+    const senddata = async (e) => {
         var latitude = geolocation.coordinates.lat
         var longitude = geolocation.coordinates.lng
         e.preventDefault();
         console.log("I am here")
-        const{email,password} = logdata;
-        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/users/login",{
+        const { email, password } = logdata;
+        const res = await fetch("https://aarogya-vaahini-api.vercel.app/api/users/login", {
             method: "POST",
-            headers:{
-                "content-Type": "application/json"                
+            headers: {
+                "content-Type": "application/json"
             },
             body: JSON.stringify({
-                email,password,
-                latitude:latitude,
-                longitude:longitude,
+                email, password,
+                latitude: latitude,
+                longitude: longitude,
             })
         })
         const data = await res.json();
         console.log(data);
-        localStorage.setItem("userdata",JSON.stringify( data));
+        localStorage.setItem("userdata", JSON.stringify(data));
         if (res.status === 400 || !data) {
             console.log("invalid details");
             toast.warn("invalid details", {
@@ -60,57 +60,35 @@ export default function Userlogin() {
 
     }
     return (
-        <div className="font-sans relative flex flex-col justify-center min-h-screen overflow-hidden h-full w-full bg-gray-400  backdrop-filter backdrop-blur-sm bg-opacity-5">
-            <div className="w-full bg-[#1C2530] p-6 m-auto rounded-md border-2 border-gray-100 shadow-[0px_0px_40px_rgba(0,0,0,0.8)] shadow-zinc-400 lg:max-w-xl">
-                <h1 className="text-3xl tracking-wider font-semibold text-center text-white">
-                   WELCOME TO AAROGYA VAAHINI  USER LOGIN
-                </h1>
-                <form className="mt-6">
-                    <div className="mb-2">
-                        <label
-                            htmlFor="email"
-                            className="block text-lg tracking-wider -mb-1 mt-4 font-semibold text-[#F7B661]"
-                        >
-                            Email
-                        </label>
-                        <input
-                            type="email" onChange={adddata} value={logdata.email} name="email"
-                            className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your Email '
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            htmlFor="password"
-                            className="block text-lg tracking-wider -mb-1 mt-4 font-semibold text-[#F7B661]"
-                        >
-                            Password
-                        </label>
-                        <input
-                            type="password" onChange={adddata} value={logdata.password} name="password"
-                            className="block w-full px-4 py-2 mt-2 text-p bg-white border rounded-md focus:border-blue-700 focus:ring-offset-fuchsia- focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your Password '
-                        />
-                    </div>
-                    
-                    <div className="mt-6">
-                        <button className="text-lg px-40 py-2 mx-20 tracking-wide text-white transition-colors duration-200 transform  bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none" onClick={senddata}>
-                            Login
-                        </button>
-                    </div>
-                </form>
 
-                <div className="mt-6 text-sm tracking-wider text-center text-zinc-100 mx-20">
-                    {" "}
-                    Don't have an account?{" "}
-                    <div className="mt-6">
-                        <NavLink to="/users/login/users/register">
-                        <button className="text-lg px-36 py-2 tracking-wider text-white transition-colors duration-100 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none">
-                            Sign Up
-                        </button>
-                        </NavLink>
-                    </div>
+        <div className='w-full h-screen flex backdrop-filter backdrop-blur-sm bg-opacity-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 m-auto h-[540px] shadow-2xl shadow-white-900 sm:max-w-[950px] bg-gradient-to-r from-[#bdc3c7] to-[#2c3e50] rounded-lg'>
+                <div className='w-full h-[540px] hidden md:block'>
+                    <img className='w-full h-full rounded-lg' src="/user_Img1.jpg" alt="/" />
+                </div>
+                <div className='p-4 flex flex-col justify-around'>
+                    <form className=''>
+                        <h2 className='text-4xl font-bold tracking-wide text-center mb-8 text-[#00fff6]'>USER LOGIN</h2>
+                        <div className='flex flex-col py-2'>
+                            <label htmlFor="email" className='text-white font-semibold text-xl tracking-wide'>Email <span className='text-red-500 text-xl'>*</span></label>
+                            <input className='border focus:border-2 p-2 mr-2 rounded-md mt-2 focus:outline-none focus:ring focus:ring-opacity-90 focus:border-blue-500' placeholder='Email' type="email" onChange={adddata} value={logdata.email} name="email" />
+                        </div>
+                        <div className='flex flex-col py-2'>
+                            <label htmlFor="password" className='text-white text-xl font-semibold tracking-wide'>Password <span className='text-red-500'>*</span></label>
+                            <input className='border focus:border-2 p-2 mr-2 rounded-md mt-2 focus:outline-none focus:ring focus:ring-opacity-90 focus:border-blue-500' placeholder='Password' type="password" onChange={adddata} value={logdata.password} name="password" />
+                        </div>
+                        <div className='flex flex-col items-center justify-center'>
+                            <button className='w-60 py-2 my-4  hover:bg-[#241c1bb2] rounded-md bg-[#00FFF6] text-xl font-semibold tracking-normal hover:text-white' onClick={senddata}>Login</button>
+                            <p className='text-center text-white'>Don't have an account?</p>
+                            <NavLink to="/users/login/users/register">
+                                <button className='w-60 py-2 my-4  hover:bg-[#241c1bb2] rounded-md bg-[#00FFF6] text-xl font-semibold tracking-normal hover:text-white'>Sign Up</button>
+                            </NavLink>
+                        </div>
+                    </form>
                 </div>
             </div>
             <ToastContainer />
         </div>
+
     );
 }

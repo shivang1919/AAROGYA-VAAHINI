@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 // import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
@@ -50,81 +51,40 @@ const Usersignup = () => {
 
     }
     return (
-        <div className="font-sans relative flex flex-col justify-center min-h-screen overflow-hidden h-full w-full bg-gray-400  backdrop-filter backdrop-blur-sm bg-opacity-5">
-            <div className="w-full bg-[#1C2530] p-6 m-auto rounded-md border-2 border-gray-100 shadow-[0px_0px_40px_rgba(0,0,0,0.8)] shadow-zinc-400 lg:max-w-xl">
-                <h1 className="text-3xl tracking-wider font-semibold text-center text-white">
-                    WELCOME TO AAROGYA VAAHINI USER SIGN-UP
-                </h1>
-                <form className="mt-6">
-                    <div className="mb-2">
-                        <label
-                            for="name"
-                            className="block tracking-wider -mb-1 mt-4 text-lg font-semibold text-[#F7B661]"
-                        >
-                            Name
-                        </label>
-                        <input
-                            type="name" onChange={adddata} value={udata.name} name="name"
-                            className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your name '
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            for="number"
-                            className="block tracking-wider -mb-1 mt-4 text-lg font-semibold text-[#F7B661]"
-                        >
-                            Mobile Number
-                        </label>
-                        <input
-                            type="text" onChange={adddata} value={udata.mobile} name="mobile"
-                            className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your mobile number '
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            for="email"
-                            className="block tracking-wider -mb-1 mt-4 text-lg font-semibold text-[#F7B661]"
-                        >
-                            Email
-                        </label>
-                        <input
-                            type="email" onChange={adddata} value={udata.email} name="email"
-                            className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your email '
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            for="password"
-                            className="block tracking-wider -mb-1 mt-4 text-lg font-semibold text-[#F7B661]"
-                        >
-                            Password
-                        </label>
-                        <input
-                            type="password" onChange={adddata} value={udata.password} name="password"
-                            className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your password'
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            for="password"
-                            className="block tracking-wider -mb-1 mt-4 text-lg font-semibold text-[#F7B661]"
-                        >
-                            Confirm Password
-                        </label>
-                        <input
-                            type="password" onChange={adddata} value={udata.cpassword} name="cpassword"
-                            className="block w-full px-4 py-2 mt-2 text-black-700 bg-white border rounded-md focus:ring-offset-fuchsia-50 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Enter your confirmed password'
-                        />
-                    </div>
 
-                    <div className="mt-6">
-                        <button className="text-lg px-36 py-2 mx-20 tracking-wide text-white transition-colors duration-200 transform  bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none " onClick={senddata}>
-                            SIGN UP
-                        </button>
-                    </div>
-                </form>
-
-                
+        <div className='w-full h-screen flex backdrop-filter backdrop-blur-sm bg-opacity-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 m-auto h-[642px] shadow-2xl shadow-white-900 sm:max-w-[1100px] bg-gradient-to-r from-[#bdc3c7] to-[#2c3e50] rounded-lg'>
+                <div className='w-full h-[642px] hidden md:block'>
+                    <img className='w-full h-full rounded-lg' src="/user_Img1.jpg" alt="/" />
+                </div>
+                <div className='p-4 flex flex-col justify-around'>
+                    <form className=''>
+                        <h2 className='text-4xl font-bold tracking-wide text-center mb-8 text-[#00fff6]'>USER SIGN-UP</h2>
+                        <div className='flex flex-col py-2'>
+                            <label htmlFor="name" className='text-white font-semibold text-xl tracking-wide'>Name <span className='text-red-500 text-xl'>*</span></label>
+                            <input className='border focus:border-2 p-2 mr-2 rounded-md mt-2 focus:outline-none focus:ring focus:ring-opacity-90 focus:border-blue-500' placeholder='Name' type="name" onChange={adddata} value={udata.name} name="name" />
+                        </div>
+                        <div className='flex flex-col py-2'>
+                            <label htmlFor="number" className='text-white text-xl font-semibold tracking-wide'>Mobile Number <span className='text-red-500'>*</span></label>
+                            <input className='border focus:border-2 p-2 mr-2 rounded-md mt-2 focus:outline-none focus:ring focus:ring-opacity-90 focus:border-blue-500' placeholder='Mobile Number' type="text" onChange={adddata} value={udata.mobile} name="mobile" />
+                        </div>
+                        <div className='flex flex-col py-2'>
+                            <label htmlFor="email" className='text-white text-xl font-semibold tracking-wide'>Email <span className='text-red-500'>*</span></label>
+                            <input className='border focus:border-2 p-2 mr-2 rounded-md mt-2 focus:outline-none focus:ring focus:ring-opacity-90 focus:border-blue-500' placeholder='Email' type="email" onChange={adddata} value={udata.email} name="email" />
+                        </div>
+                        <div className='flex flex-col py-2'>
+                            <label htmlFor="password" className='text-white text-xl font-semibold tracking-wide'>Password <span className='text-red-500'>*</span></label>
+                            <input className='border focus:border-2 p-2 mr-2 rounded-md mt-2 focus:outline-none focus:ring focus:ring-opacity-90 focus:border-blue-500' placeholder='Password' type="password" onChange={adddata} value={udata.password} name="password" />
+                        </div>
+                        <div className='flex flex-col py-2'>
+                            <label htmlFor="password" className='text-white text-xl font-semibold tracking-wide'>Confirm Password <span className='text-red-500'>*</span></label>
+                            <input className='border focus:border-2 p-2 mr-2 rounded-md mt-2 focus:outline-none focus:ring focus:ring-opacity-90 focus:border-blue-500' placeholder='Confirm Password' type="password" onChange={adddata} value={udata.cpassword} name="cpassword" />
+                        </div>
+                        <div className='flex flex-col items-center justify-center'>
+                            <button className='w-60 py-2 my-4  hover:bg-[#241c1bb2] rounded-md bg-[#00FFF6] text-xl font-semibold tracking-normal hover:text-white' onClick={senddata}>Sign Up</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <ToastContainer />
         </div>
