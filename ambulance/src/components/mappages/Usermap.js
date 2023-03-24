@@ -15,7 +15,7 @@ const mapStyles = {
 
 
 var userda = JSON.parse(localStorage.getItem("userdata"));
-console.log(userda.updatedUser.latitude)
+// console.log(userda.updatedUser.latitude)
 
 const Usermap = () => {
     const [driver, setDriver] = useState([])
