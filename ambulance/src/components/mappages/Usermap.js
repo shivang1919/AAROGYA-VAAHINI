@@ -15,7 +15,7 @@ const mapStyles = {
 
 
 var userda = JSON.parse(localStorage.getItem("userdata"));
-// console.log(userda.updatedUser.latitude)
+console.log(userda?.updatedUser?.latitude)
 
 const Usermap = () => {
     const [driver, setDriver] = useState([])
@@ -50,16 +50,16 @@ const Usermap = () => {
                 style={mapStyles}
                 initialCenter={
                     {
-                        lat: userda.updatedUser.latitude,
-                        lng: userda.updatedUser.longitude
+                        lat: userda?.updatedUser?.latitude,
+                        lng: userda?.updatedUser?.longitude
                     }
                 }
             >
                 <Marker position={{
-                    lat: userda.updatedUser.latitude,
-                    lng: userda.updatedUser.longitude
+                    lat: userda?.updatedUser?.latitude,
+                    lng: userda?.updatedUser?.longitude
                 }}
-                    name={userda.updatedUser.name}
+                    name={userda?.updatedUser?.name}
                 >
                 </Marker>
                 {
