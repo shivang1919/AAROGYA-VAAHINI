@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const generateToken = require('../config/token')
 const User = require('../models/user')
+const Driver = require('../models/driver')
 const bcrypt = require('bcryptjs')
 const { findByIdAndUpdate } = require('../models/user')
 // creating a new user (REGISTER)
@@ -76,8 +77,23 @@ const loginUser = asyncHandler(async(req,res)=>{
         }
     }
     // checking password
-    
+})
+const setuserdetails = asyncHandler(async(req,res)=>{
+    try{
+        console.log(req.body)
+        const setDriver=await Driver.findOne({email:req.body.email});
+        console.log(setDriver)
+        setDriver.targetuser=req.body.user;
+        console.log(setDriver)
+        // const setdriver = await Driver.findByIdAndUpdate(req.body.email,{targetuser:req.body.user})
+        await setDriver.save();
+        res.status(201).json({ setDriver })
+    }catch(error){
+        res.status(500).json({ message: "Error in setting up driver" })
+        console.log(error)
+    }
 
 })
 
-module.exports = {registerUser,loginUser}
+
+module.exports = {registerUser,loginUser,setuserdetails}

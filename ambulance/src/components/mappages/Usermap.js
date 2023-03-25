@@ -35,10 +35,13 @@ const Usermap = (props) => {
         const [activeMarker, setActiveMarker] = useState({})
         const [selectedPlace, setSelectedPlace] = useState({});
         const [showingInfoWindow, setShowingInfoWindow] = useState(false);
+        const [updateddri, setUpdateddri] = useState([])
         const onMarkerClick = (props, marker) => {
             setActiveMarker(marker);
             setSelectedPlace(props);
             setShowingInfoWindow(true);
+            console.log(props)
+            settinguser(props)
         }
         const onInfoWindowClose = () => {
             setActiveMarker(null);
@@ -50,6 +53,27 @@ const Usermap = (props) => {
                 setShowingInfoWindow(false);
             }
         };
+        const settinguser = async (e) => {
+            // e.preventDefault();
+            console.log(e)
+            const res = await fetch("http://localhost:8000/api/users/setuserdetails", {
+                method: "POST",
+                headers: {
+                    "content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: e?.email,
+                    user: userda?.updatedUser?._id
+                })
+            })
+            const updateddriver = await res.json();
+            console.log(updateddriver)
+            // setDriver(updateddriver?.setDriver)
+
+
+            // localStorage.setItem("availibledriver",JSON.stringify(dridata))
+        }
+
 
         return (
             <Map google={window.google}
@@ -84,9 +108,10 @@ const Usermap = (props) => {
                                     lat: e?.latitude,
                                     lng: e?.longitude
                                 }}
+                                email={e?.email}
                                 icon={{
 
-                                    url:'/ambumarker.png',
+                                    url: '/ambumarker.png',
 
                                     anchor: new google.maps.Point(17, 46),
 
@@ -113,10 +138,12 @@ const Usermap = (props) => {
                     marker={activeMarker}
                     onClose={onInfoWindowClose}
                     visible={showingInfoWindow}
+
                 >
                     <div>
-                        <h4>{selectedPlace.name}</h4>
+                        <h4>{selectedPlace.name}jjjj</h4>
                         <h4>{selectedPlace.mobile}</h4>
+                        <button onClick={() => alert('hii')}>Connect to driver</button>
                     </div>
                 </InfoWindow>
 
@@ -124,7 +151,7 @@ const Usermap = (props) => {
             </Map >
         )
     }
-    
+
 
 
 
