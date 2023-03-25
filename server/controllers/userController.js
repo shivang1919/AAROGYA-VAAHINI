@@ -6,10 +6,10 @@ const bcrypt = require('bcryptjs')
 const { findByIdAndUpdate } = require('../models/user')
 // creating a new user (REGISTER)
 const registerUser = asyncHandler(async(req,res)=>{
-    const{name,email,mobile,password,cpassword} = req.body
+    const{name,email,mobile,password,cpassword,aadhar} = req.body
 
     // if all the fields are empty
-    if(!name || !email || !mobile || !password || !cpassword){
+    if(!name || !email || !mobile || !password || !cpassword || !aadhar){
         res.status(400).json({"error":"Please fill in all the input fields"})
         return
     }
@@ -25,7 +25,7 @@ const registerUser = asyncHandler(async(req,res)=>{
     var salt = bcrypt.genSaltSync(12);
     // when there is no signing up error
     const user = new User({
-        name,email,mobile,
+        name,email,mobile,aadhar,
         password:bcrypt.hashSync(password, salt),
         cpassword:bcrypt.hashSync(password, salt)
     }) 
@@ -40,6 +40,7 @@ const registerUser = asyncHandler(async(req,res)=>{
             mobile: user.mobile,
             password:user.password,
             cpassword:user.cpassword,
+            aadhar:user.aadhar,
             token : generateToken(user.id)
         })
     }
@@ -78,22 +79,8 @@ const loginUser = asyncHandler(async(req,res)=>{
     }
     // checking password
 })
-const setuserdetails = asyncHandler(async(req,res)=>{
-    try{
-        console.log(req.body)
-        const setDriver=await Driver.findOne({email:req.body.email});
-        console.log(setDriver)
-        setDriver.targetuser=req.body.user;
-        console.log(setDriver)
-        // const setdriver = await Driver.findByIdAndUpdate(req.body.email,{targetuser:req.body.user})
-        await setDriver.save();
-        res.status(201).json({ setDriver })
-    }catch(error){
-        res.status(500).json({ message: "Error in setting up driver" })
-        console.log(error)
-    }
-
-})
 
 
-module.exports = {registerUser,loginUser,setuserdetails}
+
+
+module.exports = {registerUser,loginUser}

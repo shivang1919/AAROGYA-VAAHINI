@@ -4,10 +4,10 @@ const Driver = require('../models/driver')
 const bcrypt = require('bcryptjs')
 // creating a new user (REGISTER)
 const registerDriver = asyncHandler(async (req, res) => {
-    const { name, email, mobile, password, cpassword } = req.body
+    const { name, email, mobile, password, cpassword,aadhar } = req.body
 
     // if all the fields are empty
-    if (!name || !email || !mobile || !password || !cpassword) {
+    if (!name || !email || !mobile || !password || !cpassword || !aadhar) {
         res.status(400).json({ "error": "Please fill in all the input fields" })
         return
     }
@@ -23,7 +23,7 @@ const registerDriver = asyncHandler(async (req, res) => {
     var salt = bcrypt.genSaltSync(12);
     // when there is no signing up error
     const driver = new Driver({
-        name, email, mobile,
+        name, email, mobile,aadhar,
         password: bcrypt.hashSync(password, salt),
         cpassword: bcrypt.hashSync(password, salt),
         isloggedin: false,
@@ -41,7 +41,7 @@ const registerDriver = asyncHandler(async (req, res) => {
             mobile: driver.mobile,
             password: driver.password,
             cpassword: driver.cpassword,
-
+            aadhar: driver.aadhar,
             token: generateToken(driver.id)
         })
     }

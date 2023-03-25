@@ -20,7 +20,14 @@ const UserSchema = new mongoose.Schema(
         mobile: {
             type: String,
             required: true,
-            maxlength: 10
+            maxlength: 10,
+            unique:true
+        },
+        aadhar: {
+            type: String,
+            required: true,
+            maxlength: 12,
+            unique:true
         },
         password: {
             type: String,
