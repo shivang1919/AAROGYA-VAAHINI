@@ -31,7 +31,7 @@ const useGeoLocation = () => {
                 }
             }))          
         }
-        navigator.geolocation.watchPosition(onSuccess, onError)
+        navigator.geolocation.getCurrentPosition(onSuccess, onError)
     },[])
     return location;
 }
