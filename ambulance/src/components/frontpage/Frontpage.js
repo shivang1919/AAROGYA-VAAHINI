@@ -22,7 +22,7 @@ export default function Frontpage() {
                             <p className="pFont text-start fixed text-2xl tracking-wider font-semibold text-center text-white mt-72 ml-20">
                                 Now get your ambulance at<br></br> your footstep.
                             </p>
-                            <div className=" align-bottom flex justify-end items-left content-start mb-64 mr-32 pt-12">
+                            <div className="  btnStyle align-bottom flex justify-end items-left content-start mb-64 mr-32 pt-12">
                                 <NavLink to="users/login/">
 
                                     <button className="items-left text-lg w-48 py-2 tracking-wider text-white transition-colors duration-100 transform bg-blue-800 rounded-md hover:bg-white focus:outline-none hover:text-black hover:font-semibold mr-4 mt-96">
