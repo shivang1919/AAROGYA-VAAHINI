@@ -86,7 +86,7 @@ const Driversignup = () => {
                         </div>
                         <div className='flex flex-col py-2'>
                             <label htmlFor="password" className='text-white text-xl font-semibold tracking-wide'>AADHAR NUMBER <span className='text-red-500'>*</span></label>
-                            <input className='border focus:border-2 p-2 mr-2 rounded-md mt-2 focus:outline-none focus:ring focus:ring-opacity-90 focus:border-blue-500' placeholder='Enter your 12 digit aadhar number' type="text" onChange={adddata} value={ddata.aadhar} name="cpassword" />
+                            <input className='border focus:border-2 p-2 mr-2 rounded-md mt-2 focus:outline-none focus:ring focus:ring-opacity-90 focus:border-blue-500' placeholder='Enter your 12 digit aadhar number' type="text" onChange={adddata} value={ddata.aadhar} name="aadhar" />
                         </div>
                         <div className='flex flex-col items-center justify-center'>
                             <button className='w-60 py-2 my-4  hover:bg-[#241c1bb2] rounded-md bg-[#00FFF6] text-xl font-semibold tracking-normal hover:text-white' onClick={senddata}>Sign Up</button>
