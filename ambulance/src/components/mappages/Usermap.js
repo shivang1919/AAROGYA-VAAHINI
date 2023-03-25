@@ -86,7 +86,7 @@ const Usermap = (props) => {
                                 }}
                                 icon={{
 
-                                    url: '/ambumarker.png',
+                                    url: '/ambulance_marker.jpg',
 
                                     anchor: new google.maps.Point(17, 46),
 
