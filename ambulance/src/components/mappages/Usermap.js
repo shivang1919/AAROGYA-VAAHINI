@@ -41,7 +41,7 @@ const Usermap = (props) => {
             setSelectedPlace(props);
             setShowingInfoWindow(true);
             console.log(props)
-            
+
         }
         const onInfoWindowClose = () => {
             setActiveMarker(null);
@@ -53,7 +53,7 @@ const Usermap = (props) => {
                 setShowingInfoWindow(false);
             }
         };
-        
+
 
 
         return (
@@ -119,12 +119,13 @@ const Usermap = (props) => {
                     marker={activeMarker}
                     onClose={onInfoWindowClose}
                     visible={showingInfoWindow}
-                    
+
                 >
                     <div>
                         <h4>{selectedPlace.name}</h4>
-                        <h4>{selectedPlace.mobile}</h4>
-                        
+                        {/* <a href={"sms:{selectedPlace.mobile}"}></a> */}
+                        <a href={`tel:${selectedPlace.mobile}`}>test</a>
+
                     </div>
                     <button >Connect to driver</button>
                 </InfoWindow>
@@ -147,7 +148,7 @@ const Usermap = (props) => {
                 <div >
                     <Mappo />
                 </div>
-                <div className='flex flex:col items-center justify-center'>
+                <div className='flex flex:col items-center justify-center relative top-84vh'>
                     <button className="z-10 items-left text-lg w-48 py-2 tracking-wider text-white transition-colors duration-100 transform bg-red-800 rounded-md hover:bg-white focus:outline-none hover:text-red-800 hover:font-semibold " onClick={showdrivers}>
                         See availible drivers
                     </button>
