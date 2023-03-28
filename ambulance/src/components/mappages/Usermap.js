@@ -123,7 +123,6 @@ const Usermap = (props) => {
                 >
                     <div>
                         <h4>{selectedPlace.name}</h4>
-                        {/* <a href={"sms:{selectedPlace.mobile}"}></a> */}
                         <a href={`tel:${selectedPlace.mobile}`}>Call the driver</a>
 
                     </div>
