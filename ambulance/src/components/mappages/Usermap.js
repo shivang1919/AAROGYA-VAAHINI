@@ -1,7 +1,7 @@
 /*global google*/
-import React, { useState, useRef } from 'react';
+import React, { useState} from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-import Markero from "./Markero"
+
 
 const mapStyles = {
     width: '100%',
