@@ -124,10 +124,10 @@ const Usermap = (props) => {
                     <div>
                         <h4>{selectedPlace.name}</h4>
                         {/* <a href={"sms:{selectedPlace.mobile}"}></a> */}
-                        <a href={`tel:${selectedPlace.mobile}`}>test</a>
+                        <a href={`tel:${selectedPlace.mobile}`}>Call the driver</a>
 
                     </div>
-                    <button >Connect to driver</button>
+
                 </InfoWindow>
 
 
@@ -150,7 +150,7 @@ const Usermap = (props) => {
                 </div>
                 <div className='flex flex:col items-center justify-center relative top-84vh'>
                     <button className="z-10 items-left text-lg w-48 py-2 tracking-wider text-white transition-colors duration-100 transform bg-red-800 rounded-md hover:bg-white focus:outline-none hover:text-red-800 hover:font-semibold " onClick={showdrivers}>
-                        See availible drivers
+                        See available drivers
                     </button>
                 </div>
 
